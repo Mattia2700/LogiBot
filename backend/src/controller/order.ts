@@ -70,7 +70,10 @@ async function createChatAndDeal(order: Order) {
             id: Math.floor(Math.random() * 1000000),
             orderId: order.id,
             supplierId: supplier.id,
-            messages: [`You have a new order request! 🚚 Here are the details:\nThe maximum price is ${order.maxAllowedPrice}.\nLoading will take place in ${order.loadingAddress} on ${order.loadingDate}, and unloading is scheduled in ${order.unloadingAddress} on ${order.unloadingDate}.\nThe goods being transported are ${order.goodsType}.`]
+            messages: [{
+                role: 'bot',
+                text: `You have a new order request! 🚚 Here are the details:\nThe maximum price is ${order.maxAllowedPrice}.\nLoading will take place in ${order.loadingAddress} on ${order.loadingDate}, and unloading is scheduled in ${order.unloadingAddress} on ${order.unloadingDate}.\nThe goods being transported are ${order.goodsType}.`
+            }]
         });
         await chat.save();
 
@@ -89,9 +92,13 @@ const read = async (req: Request, res: Response) => {
     res.json(result);
 }
 
-
+const readById = async (req: Request, res: Response) => {
+    let result = await OrderModel.findOne({id: req.params.id}).exec();
+    res.json(result);
+}
 
 export default {
     create,
-    read
+    read,
+    readById
 }

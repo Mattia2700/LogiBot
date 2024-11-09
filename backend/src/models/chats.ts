@@ -16,7 +16,7 @@ export const chatsSchema = new Schema(
             required: true,
         },
         messages: {
-            type: [Object],
+            type: [Object<Message>],
             required: true,
         }
     },
