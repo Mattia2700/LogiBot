@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "chatbot"
+version = "0.1.0"
+description = ""
+authors = ["Mattia Franzin <mfranzin@fbk.eu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langchain-ollama = "^0.2.0"
+ollama = "^0.3.3"
+langchain = "^0.3.7"
+fastapi = {extras = ["standard"], version = "^0.115.4"}
+uvicorn = "^0.32.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
