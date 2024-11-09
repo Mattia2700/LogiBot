@@ -1,18 +1,5 @@
 import { model, Schema, InferSchemaType, Types } from "mongoose";
-
-export const messageSchema = new Schema(
-    {
-        role: {
-            type: String,
-            required: true,
-        },
-        text: {
-            type: String,
-            required: true,
-        },
-    },
-    { minimize: false }
-);
+import {Message} from "../types/message";
 
 export const chatsSchema = new Schema(
     {
@@ -29,7 +16,7 @@ export const chatsSchema = new Schema(
             required: true,
         },
         messages: {
-            type: [messageSchema],
+            type: [Object],
             required: true,
         }
     },

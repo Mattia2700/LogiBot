@@ -2,7 +2,11 @@
   <div class="h-full">
     <h1 class="mb-4 text-3xl">Orders</h1>
 
-    <DataView :value="orderStore.orders" layout="grid" dataKey="id">
+<!--    <div v-for="order in orderStore.orders" :key="order.id">-->
+<!--      {{ order.id }} {{ order.loadingAddress }} {{ order.loadingDate }} {{ order.unloadingAddress }} {{ order.unloadingDate }}-->
+<!--    </div>-->
+
+    <DataView :value="orderStore.orders" layout="grid">
       <template #list="{ items }">
         <div
           v-if="items.length !== 0"
@@ -14,7 +18,7 @@
           }"
         >
           <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <p class="text-lg font-semibold">Order ID: {{ order.id }}</p>
+            <p class="text-lg font-semibold ">Order ID: {{ order.id }}</p>
             <p class="text-lg font-semibold">
               From: {{ order.loadingAddress }} {{ order.loadingDate }}
             </p>
@@ -65,7 +69,8 @@
 import OrderForm from '@components/OrderForm.vue';
 import { useOrderStore } from '@store/orderStore';
 import { IconDirectionSign, IconPlus } from '@tabler/icons-vue';
-import { ref } from 'vue';
+import {reactive, ref, watch} from 'vue';
+import { onMounted } from 'vue';
 
 const orderStore = useOrderStore();
 
@@ -78,6 +83,12 @@ const showModal = ref(false);
 const closeModal = () => {
   showModal.value = false;
 };
+
+// Fetch orders on component mount
+onMounted(() => {
+  orderStore.fetchOrders();
+});
+
 </script>
 
 <style scoped>

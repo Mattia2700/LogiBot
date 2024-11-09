@@ -3,11 +3,22 @@
 import express from 'express';
 import {connectToDatabase} from "./config";
 import router from "./src/routes/api";
-import {populateSuppliers} from "./src/utils/suppliers";
+import cors from "cors";
+
 const app = express();
 
 app.use(express.json());
-app.use("/", router);
+app.use("/", enableCors, router);
+
+function enableCors(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(200);
+    }
+    next();
+}
 
 // start the Express server
 const port = 3000;

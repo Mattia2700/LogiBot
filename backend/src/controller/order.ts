@@ -44,6 +44,8 @@ const create = async (req: Request, res: Response) => {
         goodsType: body.goodsType,
     });
 
+    console.log("order", order);
+
     let result = await order.save();
     await createChatAndDeal(result as Order);
 
@@ -76,7 +78,7 @@ async function createChatAndDeal(order: Order) {
             id: Math.floor(Math.random() * 1000000),
             orderId: order.id,
             supplierId: supplier.id,
-            accordedPrice: null,
+            accordedPrice: -1,
         })
         await candidateDeal.save();
     }
