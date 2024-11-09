@@ -11,6 +11,10 @@ const router = Router();
 router.post('/order', orderController.create as any);
 router.get('/order', orderController.read as any);
 
-router.get('/chats', gruber.list as any);
+router.get('/chats', gruber.get_chats as any);
+router.get('/candidate_deals', gruber.get_deals as any);
+
+router.post('/message', gruber.send_message as any);
+
 
 export default router;

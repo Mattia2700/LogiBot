@@ -16,8 +16,7 @@ export const candidateDeals = new Schema(
         },
         accordedPrice: {
             type: Number,
-            required: false,
-            default: null,
+            required: true,
         },
     },
     { minimize: false }

@@ -30,8 +30,7 @@ export const chatsSchema = new Schema(
         },
         messages: {
             type: [messageSchema],
-            required: false,
-            default: [],
+            required: true,
         }
     },
     { minimize: false }
