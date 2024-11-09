@@ -1,17 +1,24 @@
 // create express app
 
 import express from 'express';
-
+import {connectToDatabase} from "./config";
+import router from "./src/routes/api";
 const app = express();
 
-// define a route handler for the default home page
-app.get('/', (req: any, res: any) => {
-  res.send('Hello world!!!!');
-});
+app.use(express.json());
+app.use("/", router);
 
 // start the Express server
 const port = 3000;
 
-app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
-});
+connectToDatabase()
+    .then(() => {
+      console.log("Connected to the database");
+      app.listen(port, () => {
+        console.log(`[server]: running at http://localhost:${port}`);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
