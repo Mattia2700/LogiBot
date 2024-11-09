@@ -1,30 +1,33 @@
 <template>
-  <div>
-
-    <div class="w-1/4 bg-elevation-light-1 p-4">
-      <h2 class="mb-4 text-2xl">Researcher Dashboard Menu</h2>
+  <div class="flex">
+    <div class="h-[80%] w-1/4 bg-elevation-light-0 p-4">
+      <h2 class="mb-4 text-2xl">Menu</h2>
       <ul>
         <li>
-          <Button
-            @click="goTo('dashboard')"
-            :class="{ 'bg-primary': currentRoute === 'dashboard' }"
-            class="w-full p-2 mb-2 rounded-lg text-left"
+          <button
+            @click="goTo('orders')"
+            :class="{ 'bg-blue': currentRoute === 'orders' }"
+            class="mb-2 w-full rounded-lg p-1 text-left text-xl"
           >
-            Dashboard
-          </Button>
-          <Button
+            Orders
+          </button>
+          <button
             @click="goTo('chats')"
-            :class="{ 'bg-primary': currentRoute === 'chats' }"
-            class="w-full p-2 mb-2 rounded-lg text-left"
+            :class="{ 'bg-blue': currentRoute === 'chats' }"
+            class="mb-2 w-full rounded-lg p-2 text-left text-xl"
           >
             Chats
-          </Button>
+          </button>
         </li>
       </ul>
     </div>
-    <transition name="fade">
-      <router-view />
-    </transition>
+
+    <div class="flex flex-1 flex-col">
+      <div class="flex-1 overflow-auto p-4">
+        <!-- Qui verrà mostrato il contenuto in base alla rotta -->
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,9 +40,11 @@ const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.name as string);
 console.log(currentRoute.value);
 
+if (!currentRoute.value) router.push({ name: 'orders' });
+
 const goTo = (routeName?: string) => {
   if (!routeName)
-    router.push({ path: "/" }); // Naviga alla dashboard
+    router.push({ path: '/' }); // Naviga alla dashboard
   else router.push({ name: routeName }); // Naviga alla rotta
 };
 </script>

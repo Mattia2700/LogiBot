@@ -6,7 +6,8 @@
       "@store/*": ["./src/store/*"],
       "@views/*": ["./src/views/*"],
       "@components/*": ["./src/components/*"],
-      "@router/*": ["./src/router/*"]
+      "@router/*": ["./src/router/*"],
+      "@presets/*": ["./src/presets/*"]
     },
     "noEmit": true,
     "composite": true,

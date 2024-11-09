@@ -1,24 +1,25 @@
-
+import Chats from '@views/Chats.vue';
 import Dashboard from '@views/Dashboard.vue';
+import Orders from '@views/Orders.vue';
 
-import {
-  createRouter,
-  createWebHistory,
-  RouteLocationNormalized,
-} from 'vue-router';
-
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
-  { path: '/', component: Dashboard },
- 
-  { path: '/:pathMatch(.*)*', redirect: "/" },
+  {
+    path: '/',
+    component: Dashboard,
+    children: [
+      { path: '/orders', component: Orders, name: 'orders' },
+      { path: '/chats', component: Chats, name: 'chats' },
+    ],
+  },
+
+  { path: '/:pathMatch(.*)*', redirect: '/dashboard' },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-
 
 export default router;

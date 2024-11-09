@@ -8,6 +8,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+import IST from '@presets/IST';
 import 'primeicons/primeicons.css';
 import './assets/styles/base.css';
 import './assets/styles/global.css'; // variabili globali per il tema, non ancora usato
@@ -28,6 +29,7 @@ const primevueConfig = {
 
 app.use(PrimeVue, {
   theme: {
+    preset: IST,
     options: {
       prefix: 'p',
       darkModeSelector: '.p-dark',
