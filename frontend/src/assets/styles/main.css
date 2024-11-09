@@ -1,0 +1,40 @@
+/* src/assets/styles/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.elevation-light-0 {
+  @apply from-elevation-light-0;
+  @apply from-neutral-10;
+}
+
+.elevation-light-1 {
+  @apply from-elevation-light-1;
+  @apply from-neutral-60;
+}
+
+.elevation-light-2 {
+  @apply from-elevation-light-2;
+  @apply from-neutral-10;
+}
+
+.elevation-dark-0 {
+  @apply from-elevation-dark-0;
+  @apply from-neutral-100;
+}
+
+.elevation-dark-1 {
+  @apply from-elevation-dark-1;
+  @apply from-neutral-80;
+}
+
+.elevation-dark-2 {
+  @apply from-elevation-dark-2;
+  @apply from-neutral-100;
+}

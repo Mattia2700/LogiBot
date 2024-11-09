@@ -1,0 +1,117 @@
+/* Primary Palette */
+:root {
+  --p-primary-50: #fcf3f8; /* Lightest tint */
+  --p-primary-100: #f9e7f1; /* Lighter tint */
+  --p-primary-200: #f3d0e0; /* Light tint */
+  --p-primary-300: #ecb8d0; /* Base color */
+  --p-primary-400: #daa1bc; /* Slightly darker */
+  --p-primary-500: #a74964; /* Base primary color */
+  --p-primary-600: #8b3b58; /* Darker */
+  --p-primary-700: #743149; /* Even darker */
+  --p-primary-800: #5d273b; /* Dark shade */
+  --p-primary-900: #461e2c; /* Darkest shade */
+  --p-primary-950: #2f141d; /* Very darkest shade */
+}
+
+/* Neutral Palette */
+:root {
+  --p-neutral-0: #ffffff; /* White */
+  --p-neutral-10: #f5f5f5; /* Light gray */
+  --p-neutral-20: #e0e0e0; /* Slightly darker */
+  --p-neutral-30: #bdbdbd; /* Darker */
+  --p-neutral-40: #9e9e9e; /* Even darker */
+  --p-neutral-50: #757575; /* Dark shade */
+  --p-neutral-60: #616161; /* Darker shade */
+  --p-neutral-70: #424242; /* Almost black */
+  --p-neutral-80: #212121; /* Black */
+}
+
+/* Surface Palette */
+:root {
+  --p-surface-0: #ffffff; /* White */
+  --p-surface-50: #fdf4f7; /* Very light */
+  --p-surface-100: #fbe9ef; /* Light */
+  --p-surface-200: #f6d3de; /* Light pink */
+  --p-surface-300: #f1bdce; /* Pink */
+  --p-surface-400: #eaa7be; /* Medium pink */
+  --p-surface-500: #e491ad; /* Base surface color */
+  --p-surface-600: #c87d99; /* Slightly darker */
+  --p-surface-700: #a46881; /* Darker pink */
+  --p-surface-800: #815469; /* Dark pink */
+  --p-surface-900: #5d3f51; /* Almost dark */
+  --p-surface-950: #392b39; /* Very dark */
+}
+
+/* Light Mode */
+:root {
+  --p-primary-color: var(--p-primary-500); /* Base primary color */
+  --p-primary-contrast-color: var(--p-surface-0); /* White */
+  --p-primary-hover-color: var(--p-primary-600); /* Slightly darker primary */
+  --p-primary-active-color: var(--p-primary-700); /* Even darker primary */
+  --p-content-border-color: var(--p-surface-200); /* Light gray for borders */
+  --p-content-hover-background: var(
+    --p-surface-100
+  ); /* Light pink background */
+  --p-content-hover-color: var(--p-surface-800); /* Dark pink text on hover */
+  --p-highlight-background: var(
+    --p-primary-50
+  ); /* Lightest primary background */
+  --p-highlight-color: var(
+    --p-primary-700
+  ); /* Dark primary for highlight text */
+  --p-highlight-focus-background: var(
+    --p-primary-100
+  ); /* Lighter primary for focus */
+  --p-highlight-focus-color: var(
+    --p-primary-800
+  ); /* Darker primary for focus text */
+  --p-text-color: var(--p-surface-700); /* Base text color */
+  --p-text-hover-color: var(--p-surface-800); /* Darker text color on hover */
+  --p-text-muted-color: var(--p-surface-500); /* Muted text color */
+  --p-text-hover-muted-color: var(
+    --p-surface-600
+  ); /* Darker muted text color on hover */
+}
+
+/* 
+ * Dark Mode
+ * Change the .p-dark to match the darkMode in tailwind.config.
+ * For example; 
+ *  darkMode: ['selector', '[class*="app-dark"]'] 
+ *  should match;
+ * :root.app-dark
+*/
+/* Dark Mode */
+:root.p-dark {
+  --p-primary-color: var(--p-primary-400); /* Slightly lighter primary */
+  --p-primary-contrast-color: var(--p-surface-900); /* Very dark for contrast */
+  --p-primary-hover-color: var(--p-primary-300); /* Lighter primary on hover */
+  --p-primary-active-color: var(
+    --p-primary-200
+  ); /* Even lighter primary on active */
+  --p-content-border-color: var(--p-surface-700); /* Dark gray for borders */
+  --p-content-hover-background: var(--p-surface-800); /* Dark pink background */
+  --p-content-hover-color: var(
+    --p-surface-0
+  ); /* White text on dark background */
+  --p-highlight-background: rgba(
+    167,
+    73,
+    100,
+    0.84
+  ); /* Semi-transparent highlight color */
+  --p-highlight-color: rgba(255, 255, 255, 0.87); /* White highlight text */
+  --p-highlight-focus-background: rgba(
+    167,
+    73,
+    100,
+    0.76
+  ); /* Slightly darker highlight for focus */
+  --p-highlight-focus-color: rgba(255, 255, 255, 0.87); /* White focus text */
+  --p-text-color: var(--p-surface-0); /* White text color */
+  --p-text-hover-color: var(--p-surface-0); /* White text color on hover */
+  --p-text-muted-color: var(--p-surface-400); /* Muted text color */
+  --p-text-hover-muted-color: var(
+    --p-surface-300
+  ); /* Darker muted text color on hover */
+}

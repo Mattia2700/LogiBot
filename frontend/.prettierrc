@@ -1,0 +1,16 @@
+{
+  "printWidth": 80,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge"
+  ],
+
+  "tailwindAttributes": ["tw"],
+  "tailwindFunctions": ["tw"],
+  "tailwindConfig": "./tailwind.config.js",
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tabWidth": 2
+}

@@ -1,0 +1,17 @@
+/* src/styles/global.css */
+:root {
+  --color-primary: #3490dc;
+  --color-secondary: #ffed4a;
+  --color-tertiary: #38c172;
+  --color-text-primary: #333;
+  --color-text-secondary: #666;
+  --color-bg-light: #f8f9fa;
+  --color-bg-dark: #343a40;
+}
+
+.dark {
+  --color-bg-light: #1e293b;
+  --color-bg-dark: #0f172a;
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+}

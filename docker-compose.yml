@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    #depends_on:
+    #  - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+    #command: tail -f /dev/null
+
+volumes:
+  mongo-data:
