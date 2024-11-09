@@ -2,7 +2,9 @@
   <div>
     <h1 class="text-3xl">Chats</h1>
     <div v-for="chat in chatStore.chats" :key="chat.id">
-      {{ chat.supplierId }}
+      <div @click="router.push(`/chat/${chat.id}`)">
+        {{ chat.id }}
+      </div>
     </div>
   </div>
 </template>
@@ -11,8 +13,11 @@
 
 import {useChatStore} from "@store/chatStore.ts";
 import {onMounted} from "vue";
+import {useRouter} from "vue-router";
 
 const chatStore = useChatStore()
+
+const router = useRouter()
 
 onMounted(() => {
   chatStore.fetchChats()

@@ -6,6 +6,7 @@ import {Chat} from "@store/models/chat.ts";
 export const useChatStore = defineStore('chatStore', () => {
     // reactive state
     const chats = ref<Chat[]>([]);
+    const selectedChatMessages = ref<Chat>();
 
     // actions
     async function fetchChats() {
@@ -13,6 +14,14 @@ export const useChatStore = defineStore('chatStore', () => {
         const data = await response.json();
         console.log(data);
         chats.value = data;
+    }
+
+    async function fetchChatsByChatId(chatId: number) {
+        const response = await fetch('http://localhost:3000/chats');
+        let data = await response.json();
+        data.filter((chat: Chat) => chat.id === chatId);
+        console.log(data);
+        selectedChatMessages.value = data[0].messages;
     }
 
     // async function createChat(order: Chat) {
@@ -28,7 +37,9 @@ export const useChatStore = defineStore('chatStore', () => {
 
     return {
         chats,
+        selectedChatMessages,
         fetchChats,
+        fetchChatsByChatId,
         // createChat,
     };
 });
