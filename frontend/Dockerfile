@@ -4,17 +4,17 @@ FROM node:18 AS build-stage
 WORKDIR /app
 
 # Copia i file package.json e package-lock.json
-# COPY package*.json ./
+COPY package*.json ./
 
 # Installa le dipendenze
-# RUN npm install
+RUN npm install
 
 # Copia il resto dei file del progetto
-# COPY . .
+COPY . .
 
 # Espone la porta utilizzata da Vite
-#EXPOSE 5173
-EXPOSE 8088
+EXPOSE 5173
+#EXPOSE 8088
 
 # Avvia Vite in modalità sviluppo
 ENTRYPOINT ["npm", "run", "dev"]

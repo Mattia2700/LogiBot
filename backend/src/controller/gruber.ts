@@ -1,9 +1,7 @@
-import {Order, OrderModel} from "../models/order";
-
 import {Request, Response} from "express";
-import {getMessageFromChatbot} from "../utils/chatbot";
 import {ChatsModel} from "../models/chats";
 import {CandidateDealsModel} from "../models/candidate_deals";
+import chatbot from "../utils/chatbot";
 
 const get_chats = async (req: Request, res: Response) => {
     const chats = await ChatsModel.find();
@@ -28,7 +26,7 @@ const new_message = async (req: Request, res: Response) => {
         { $push: { messages: {role: "user", text: message} } },
         { new: true }
     );
-    await getMessageFromChatbot(chatId);
+    await chatbot.getMessageFromChatbot(chatId);
 }
 
 export default {

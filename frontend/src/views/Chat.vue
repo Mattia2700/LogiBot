@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import router from '@router';
 import { useChatStore } from '@store/chatStore.ts';
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 
 const chatStore = useChatStore();
 const newMessage = ref('');
 
 const chatId = router.currentRoute.value.params.id.toString();
 chatStore.loadSelectedChat(chatId);
-// onMounted(() => {});
 
 setInterval(() => {
   chatStore.fetchChatsByChatId(chatStore.selectedChat?.id!);
@@ -16,6 +15,7 @@ setInterval(() => {
 
 function sendMessage() {
   if (newMessage.value.trim()) {
+    console.log(newMessage.value);
     chatStore.sendMessage(newMessage.value);
     newMessage.value = '';
   }

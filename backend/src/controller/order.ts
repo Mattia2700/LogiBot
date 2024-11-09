@@ -51,11 +51,21 @@ const create = async (req: Request, res: Response) => {
 
 }
 
+async function getLanguage(supplierId: number) {
+    const response = await fetch(`https://hackathon-2024.gruber-logistics.dev/Supplier/GetSupplierById/${supplierId}`);
+    const data = await response.json();
+    return data.language;
+}
+
 async function createChatAndDeal(order: Order) {
     const url = `https://hackathon-2024.gruber-logistics.dev/Transport/GetTransportHistory?city1=${order.loadingAddress}&city2=${order.unloadingAddress}`;
 
     const response = await fetch(url);
     let suppliers = await response.json() as Suppliers[];
+
+    for (const supplier of suppliers) {
+        supplier.language = await getLanguage(supplier.supplierId);
+    }
 
     // sort by performance score first and then by price
     // suppliers.sort((a, b) => {
@@ -64,24 +74,29 @@ async function createChatAndDeal(order: Order) {
     //     }
     //     return b.performanceScore - a.performanceScore;
     // });
+    const averagePrice = suppliers.reduce((acc, supplier) => acc + supplier.price, 0) / suppliers.length;
 
     for (const supplier of suppliers) {
+        console.log("language", supplier.language)
         const chat = new ChatsModel({
             id: Math.floor(Math.random() * 1000000),
             orderId: order.id,
             supplierId: supplier.id,
             messages: [{
                 role: 'bot',
-                text: `You have a new order request! 🚚 Here are the details:\nThe maximum price is ${order.maxAllowedPrice}.\nLoading will take place in ${order.loadingAddress} on ${order.loadingDate}, and unloading is scheduled in ${order.unloadingAddress} on ${order.unloadingDate}.\nThe goods being transported are ${order.goodsType}.`
-            }]
+                text: `You have a new order request! 🚚 Here are the details:\nThe average price is ${averagePrice}.\nLoading will take place in ${order.loadingAddress} on ${order.loadingDate}, and unloading is scheduled in ${order.unloadingAddress} on ${order.unloadingDate}.\nThe goods being transported are ${order.goodsType}.`
+            }],
+            price: averagePrice,
+            language: supplier.language
         });
         await chat.save();
+
 
         const candidateDeal = new CandidateDealsModel({
             id: Math.floor(Math.random() * 1000000),
             orderId: order.id,
             supplierId: supplier.id,
-            accordedPrice: -1,
+            accordedPrice: averagePrice,
         })
         await candidateDeal.save();
     }

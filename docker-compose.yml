@@ -46,5 +46,21 @@ services:
       - chatbot
       - db
 
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama/ollama:/root/.ollama
+      - ./ollama/entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
 volumes:
   mongo-data:

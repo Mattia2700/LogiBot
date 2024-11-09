@@ -3,9 +3,11 @@ from fastapi import FastAPI
 
 from chatbot.chat import ChatInstance
 from chatbot.mongo import MongoHelper
+from chatbot.proxy import Proxy
 
 app = FastAPI()
-app.mongo = MongoHelper.init()
+MongoHelper.init()
+proxy = Proxy.init()
 
 # @app.get("/newchat")
 # async def chat(id: str, max_price: int, loading_address: str, unloading_address: str, loading_date: str, unloading_date: str, goods_type: str):
@@ -15,11 +17,32 @@ app.mongo = MongoHelper.init()
 
 @app.post("/chat/{id}")
 async def continue_chat(id: str):
-    chat = app.mongo.chats.find({"id": id})
-    print(chat)
-    # if instance is None:
-    #     return {"error": "Chat not found"}
-    #
+    print(id, flush=True)
+    chat = MongoHelper.chats.find({"id": id})
+    messages = []
+    for doc in chat:
+        messages = doc["messages"]
+        language = doc["language"]
+
+    print(messages, flush=True)
+
+    intent = Proxy.chat(messages)
+    new_message = ""
+
+    print(intent)
+
+    match intent:
+        case "price_negotiation":
+            new_message = Proxy.price_negotiation(messages, language)
+        case "positive_confirmation":
+            new_message = Proxy.positive_confirmation(messages, language)
+        case "negative_confirmation":
+            new_message = Proxy.negative_confirmation(language)
+
+    entry = {"role": "bot", "text": new_message}
+
+    MongoHelper.chats.update_one({"id": id}, {"$push": {"messages": entry}})
+
     # instance.proxy.history.append({"role": "user", "message": message})
     # print(f"User: {message}")
     # res = instance.proxy.get_user_intention(message)

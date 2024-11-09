@@ -26,10 +26,10 @@ export const useChatStore = defineStore('chatStore', () => {
   }
 
   async function sendMessage(message: string) {
-    // await axios.post('http://localhost:3000/chat/' + chatId, {
-    //   role: 'user',
-    //   text: message,
-    // });
+    await axios.post('http://localhost:3000/message', {
+      chatId: selectedChat.value?.id,
+      message: message,
+    });
     // await fetchChatsByChatId(chatId);
     console.log('sendMessage', message);
   }

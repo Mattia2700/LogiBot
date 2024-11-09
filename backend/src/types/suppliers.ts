@@ -14,6 +14,7 @@ export interface Suppliers {
     goodsStr: String,
     price: Number,
     performanceScore: Number,
+    language: String,
 }
 
 export interface SupplierRequest {

@@ -18,6 +18,14 @@ export const chatsSchema = new Schema(
         messages: {
             type: [Object<Message>],
             required: true,
+        },
+        price: {
+            type: Number,
+            required: true,
+        },
+        language: {
+            type: String,
+            required: true,
         }
     },
     { minimize: false }

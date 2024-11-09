@@ -1,5 +1,5 @@
-async function getMessageFromChatbot(chat_id) {
-    const response = await fetch(`http://localhost:8000/chat/${chat_id}`,
+const getMessageFromChatbot = async (chat_id: string) =>{
+    const response = await fetch(`http://chatbot:8000/chat/${chat_id}`,
         {
             method: 'POST',
             headers: {

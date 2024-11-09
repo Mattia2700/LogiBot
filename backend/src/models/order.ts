@@ -30,6 +30,10 @@ export const orderSchema = new Schema(
             type: String,
             required: true,
         },
+        price: {
+            type: Number,
+            required: false,
+        },
         notes: {
             type: String,
             required: false,
