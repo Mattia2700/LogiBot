@@ -1,44 +1,34 @@
 <template>
   <div class="h-full">
     <h1 class="mb-4 text-3xl">Orders</h1>
-
-<!--    <div v-for="order in orderStore.orders" :key="order.id">-->
-<!--      {{ order.id }} {{ order.loadingAddress }} {{ order.loadingDate }} {{ order.unloadingAddress }} {{ order.unloadingDate }}-->
-<!--    </div>-->
-
-    <DataView :value="orderStore.orders" layout="grid">
-      <template #list="{ items }">
-        <div
-          v-if="items.length !== 0"
-          v-for="(order, index) in items"
-          :key="order.id"
-          class="flex flex-col gap-4 p-6 sm:flex-row sm:items-center"
-          :class="{
-            'border-t-2 border-dark/10': index !== 0,
-          }"
-        >
-          <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <p class="text-lg font-semibold ">Order ID: {{ order.id }}</p>
-            <p class="text-lg font-semibold">
-              From: {{ order.loadingAddress }} {{ order.loadingDate }}
-            </p>
-            <p class="text-lg font-semibold">
-              To: {{ order.unloadingAddress }} {{ order.unloadingDate }}
-            </p>
-            <Button
-              class="p-button-rounded p-button-warning"
-              @click="orderDetail(order.id)"
-              v-tooltip="'Visualizza dettagli ordine'"
-            >
-              <IconDirectionSign class="h-4 w-4" />
-            </Button>
-          </div>
+    <div>
+      <div
+        v-for="order in orderStore.orders"
+        :key="order.id"
+        class="flex flex-col gap-4 bg-elevation-light-0 p-6 sm:flex-row sm:items-center"
+        v-if="orderStore.orders.length > 0"
+      >
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <p class="text-lg font-semibold">Order ID: {{ order.id }}</p>
+          <p class="text-lg font-semibold">
+            From: {{ order.loadingAddress }} {{ order.loadingDate }}
+          </p>
+          <p class="text-lg font-semibold">
+            To: {{ order.unloadingAddress }} {{ order.unloadingDate }}
+          </p>
+          <Button
+            class="p-button-rounded p-button-warning"
+            @click="orderDetail(order.id)"
+            v-tooltip="'Visualizza dettagli ordine'"
+          >
+            <IconDirectionSign class="h-4 w-4" />
+          </Button>
         </div>
-        <div v-else>
-          <p class="text-center text-lg">No orders found</p>
-        </div>
-      </template>
-    </DataView>
+      </div>
+      <div v-else>
+        <p class="text-center text-lg">No orders found</p>
+      </div>
+    </div>
 
     <div class="mt-4 w-full text-right">
       <Button rounded @click="showModal = true">
@@ -69,7 +59,7 @@
 import OrderForm from '@components/OrderForm.vue';
 import { useOrderStore } from '@store/orderStore';
 import { IconDirectionSign, IconPlus } from '@tabler/icons-vue';
-import {reactive, ref, watch} from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { onMounted } from 'vue';
 
 const orderStore = useOrderStore();
@@ -88,7 +78,6 @@ const closeModal = () => {
 onMounted(() => {
   orderStore.fetchOrders();
 });
-
 </script>
 
 <style scoped>

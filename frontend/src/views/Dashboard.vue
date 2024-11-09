@@ -6,14 +6,14 @@
         <li>
           <button
             @click="goTo('orders')"
-            :class="{ 'bg-blue': currentRoute === 'orders' }"
+            :class="{ 'bg-blue': currentRoute.startsWith('order') }"
             class="mb-2 w-full rounded-lg p-1 text-left text-xl"
           >
             Orders
           </button>
           <button
             @click="goTo('chats')"
-            :class="{ 'bg-blue': currentRoute === 'chats' }"
+            :class="{ 'bg-blue': currentRoute.startsWith('chat') }"
             class="mb-2 w-full rounded-lg p-2 text-left text-xl"
           >
             Chats

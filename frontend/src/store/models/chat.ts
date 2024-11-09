@@ -6,6 +6,6 @@ export interface Chat {
 }
 
 export interface Message {
-  role: string;
+  role: 'user' | 'bot';
   text: string;
 }

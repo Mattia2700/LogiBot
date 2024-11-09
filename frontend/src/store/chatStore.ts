@@ -1,45 +1,45 @@
+import { Chat } from '@store/models/chat.ts';
+import axios from 'axios';
 import { defineStore } from 'pinia';
-import {reactive, ref} from 'vue';
-import { Order } from './models/order';
-import {Chat} from "@store/models/chat.ts";
+import { ref } from 'vue';
 
 export const useChatStore = defineStore('chatStore', () => {
-    // reactive state
-    const chats = ref<Chat[]>([]);
-    const selectedChatMessages = ref<Chat>();
+  // reactive state
+  const chats = ref<Chat[]>([]);
+  const selectedChat = ref<Chat>();
 
-    // actions
-    async function fetchChats() {
-        const response = await fetch('http://localhost:3000/chats');
-        const data = await response.json();
-        console.log(data);
-        chats.value = data;
-    }
+  // actions
+  async function fetchChats() {
+    const response = await axios.get<Chat[]>('http://localhost:3000/chats');
+    chats.value = response.data;
+  }
 
-    async function fetchChatsByChatId(chatId: number) {
-        const response = await fetch('http://localhost:3000/chats');
-        let data = await response.json();
-        data.filter((chat: Chat) => chat.id === chatId);
-        console.log(data);
-        selectedChatMessages.value = data[0].messages;
-    }
+  async function fetchChatsByChatId(chatId: string) {
+    const response = await axios.get<Chat>(
+      'http://localhost:3000/chat/' + chatId
+    );
+    selectedChat.value = response.data;
+  }
 
-    // async function createChat(order: Chat) {
-    //     await fetch('http://localhost:3000/order', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(order),
-    //     });
-    //     await fetchChats();
-    // }
+  async function loadSelectedChat(chatId: string) {
+    selectedChat.value = chats.value.find((chat) => chat.id === chatId);
+  }
 
-    return {
-        chats,
-        selectedChatMessages,
-        fetchChats,
-        fetchChatsByChatId,
-        // createChat,
-    };
+  async function sendMessage(message: string) {
+    // await axios.post('http://localhost:3000/chat/' + chatId, {
+    //   role: 'user',
+    //   text: message,
+    // });
+    // await fetchChatsByChatId(chatId);
+    console.log('sendMessage', message);
+  }
+
+  return {
+    chats,
+    selectedChat,
+    fetchChats,
+    fetchChatsByChatId,
+    loadSelectedChat,
+    sendMessage,
+  };
 });

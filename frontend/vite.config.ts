@@ -15,8 +15,8 @@ export default defineConfig({
     }),
   ],
   server: {
-    host: true,
-    port: 8088,
+    host: '0.0.0.0', // Espone Vite su tutti gli indirizzi IP del container
+    port: 5173, // Porta di ascolto
   },
   resolve: {
     alias: {

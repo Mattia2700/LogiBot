@@ -1,18 +1,4 @@
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "8088:8088"
-    #depends_on:
-    #  - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    command: npm run dev
-    #command: tail -f /dev/null
-
   chatbot:
     build:
       context: ./chatbot
@@ -42,6 +28,23 @@ services:
     volumes:
       - mongo-data:/data/db
       - ./database/init-scripts:/docker-entrypoint-initdb.d:ro
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173" # Forwarding della porta Vite
+    environment:
+      - VITE_PORT=5173
+    volumes:
+      - ./frontend:/app
+      # - /app/node_modules
+    # command: npm run dev
+    #command: tail -f /dev/null
+    depends_on:
+      - backend
+      - chatbot
+      - db
 
 volumes:
   mongo-data:
